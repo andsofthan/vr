@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>VR</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: black;
+			overflow: hidden;
+		}
+		#player1 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			margin-top: 0; /* height: 1080px; */
+			margin-left: 10%; /* (100% - 40%) / 2 */
+			width: 40%;
+			height: 90%;
+		}
+		#player2 {
+			position: absolute;
+			right: 0;
+			top: 0;
+			margin-top: 0; /* height: 1080px; */
+			margin-right: 10%; /* (100% - 44.4%) / 2 */
+			width: 40%;
+			height: 90%;
+		}
+		#player2 {
+			left: 50%;
+		}
+		#play-pause {
+			position: absolute;
+			top: 10px;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: 10px 20px;
+			background-color: red;
+			color: white;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		#fullscreen-toggle {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 10px 20px;
+			background-color: red;
+			color: white;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="player1"></div>
+	<div id="player2"></div>
+	<button id="play-pause" onclick="toggleVideo()">Play</button>
+	<button id="fullscreen-toggle" onclick="toggleFullScreen()">Fullscreen</button>
+	<script>
+		var video1 = document.createElement('video');
+		var video2 = document.createElement('video');
+		var playing = false;
+
+		video1.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+		video1.muted = true;
+		video1.autoplay = true;
+		video1.controls = false;
+		video1.style.width = '100%';
+		video1.style.height = '100%';
+		video1.style.objectFit = 'contain';
+		document.getElementById('player1').appendChild(video1);
+
+		video2.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+		video2.muted = true;
+		video2.autoplay = true;
+		video2.controls = false;
+		video2.style.width = '100%';
+		video2.style.height = '100%';
+		video2.style.objectFit = 'contain';
+		document.getElementById('player2').appendChild(video2);
+
+		function toggleVideo() {
+			if (playing) {
+				video1.pause();
+				video2.pause();
+				document.getElementById("play-pause").innerHTML = "Play";
+			} else {
+				video1.play();
+				video2.play();
+				document.getElementById("play-pause").innerHTML = "Pause";
+			}
+			playing = !playing;
+		}
+
+		function toggleFullScreen() {
+			if (!document.fullscreenElement) {
+				document.documentElement.requestFullscreen();
+				document.getElementById("fullscreen-toggle").innerHTML = "Exit Fullscreen";
+			} else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+					document.getElementById("fullscreen-toggle").innerHTML = "Fullscreen";
+				}
+			}
+		}
+	</script>
+</body>
+</html>
