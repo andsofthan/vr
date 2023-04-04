@@ -17,18 +17,18 @@
 			left: 0;
 			top: 0;
 			margin-top: 0; /* height: 1080px; */
-			margin-left: 5.8%; /* (100% - 44.4%) / 2 */
-			width: 44.4%;
-			height: 100%;
+			margin-left: 10%; /* (100% - 40%) / 2 */
+			width: 40%;
+			height: 90%;
 		}
 		#player2 {
 			position: absolute;
 			right: 0;
 			top: 0;
 			margin-top: 0; /* height: 1080px; */
-			margin-right: 5.8%; /* (100% - 44.4%) / 2 */
-			width: 44.4%;
-			height: 100%;
+			margin-right: 10%; /* (100% - 44.4%) / 2 */
+			width: 40%;
+			height: 90%;
 		}
 		#play-toggle {
 			position: absolute;
@@ -76,25 +76,34 @@
 					'controls': 0,
 					'modestbranding': 1,
 					'rel': 0,
-					'showinfo': 0
+					'showinfo': 0,
+					'disablekb': 1 // 유튜브 영상 컨트롤 막기
 				}
 			});
-			player2 = new YT.Player('player2', {
-				height: '360',
-				width: '640',
-				videoId: 'HALG3Ty52mY',
-				playerVars: {
-					'controls': 0,
-					'modestbranding': 1,
-					'rel': 0,
-					'showinfo': 0
-				},
-				events: {
-					'onReady': function() {
-						player2.mute();
-					}
-				}
-			});
+            player2 = new YT.Player('player2', {
+                height: '360',
+                width: '640',
+                videoId: 'HALG3Ty52mY',
+                playerVars: {
+                    'controls': 0,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+					'disablekb': 1 // 유튜브 영상 컨트롤 막기
+                },
+                events: {
+                    'onReady': function() {
+                        player2.mute();
+                    },
+                    'onStateChange': function(event) {
+                        if (event.data == YT.PlayerState.PAUSED) {
+                            player1.pauseVideo();
+                        } else if (event.data == YT.PlayerState.PLAYING) {
+                            player1.playVideo();
+                        }
+                    }
+                }
+            });
 		}
 
 		function toggleVideo() {
