@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YouTube Player API - Dual Player</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: black;
+			overflow: hidden;
+		}
+		#player1 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 50%;
+			height: 100%;
+		}
+		#player2 {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 50%;
+			height: 100%;
+		}
+		#play-toggle {
+			position: absolute;
+			top: 10px;
+			left: 50%;
+			transform: translateX(-50%);
+			padding: 10px 20px;
+			background-color: red;
+			color: white;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		#fullscreen-toggle {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 10px 20px;
+			background-color: red;
+			color: white;
+			font-size: 18px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="player1"></div>
+	<div id="player2"></div>
+	<button id="play-toggle" onclick="toggleVideo()">Play</button>
+	<button id="fullscreen-toggle" onclick="toggleFullScreen()">Fullscreen</button>
+	<script>
+		var player1, player2;
+		var playing = false;
+
+		function onYouTubeIframeAPIReady() {
+			player1 = new YT.Player('player1', {
+				height: '360',
+				width: '640',
+				videoId: 'HALG3Ty52mY',
+				playerVars: {
+					'controls': 0,
+					'modestbranding': 1,
+					'rel': 0,
+					'showinfo': 0
+				}
+			});
+			player2 = new YT.Player('player2', {
+				height: '360',
+				width: '640',
+				videoId: 'HALG3Ty52mY',
+				playerVars: {
+					'controls': 0,
+					'modestbranding': 1,
+					'rel': 0,
+					'showinfo': 0
+				}
+			});
+		}
+
+		function toggleVideo() {
+			if (playing) {
+				player1.pauseVideo();
+				player2.pauseVideo();
+				document.getElementById("play-toggle").innerHTML = "Play";
+			} else {
+				player1.playVideo();
+				player2.playVideo();
+				document.getElementById("play-toggle").innerHTML = "Pause";
+			}
+			playing = !playing;
+		}
+
+		function toggleFullScreen() {
+			if (!document.fullscreenElement) {
+				document.documentElement.requestFullscreen();
+				document.getElementById("fullscreen-toggle").innerHTML = "Exit Fullscreen";
+			} else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+					document.getElementById("fullscreen-toggle").innerHTML = "Fullscreen";
+				}
+			}
+		}
+	</script>
+	<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
