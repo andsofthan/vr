@@ -15,18 +15,23 @@
 			left: 0;
 			top: 0;
 			margin-top: 0; /* height: 1080px; */
-			margin-left: 10%; /* (100% - 40%) / 2 */
+			margin-left: -5%; /* (100% - 40%) / 2 */
 			width: 40%;
 			height: 90%;
 		}
 		#player2 {
 			position: absolute;
 			right: 0;
-			top: 0;
+			top: 30%;
 			margin-top: 0; /* height: 1080px; */
-			margin-right: 10%; /* (100% - 44.4%) / 2 */
+			margin-right: 25%; /* (100% - 44.4%) / 2 */
 			width: 40%;
 			height: 90%;
+		}
+		#player2 img {
+			width: 50%;
+			height: auto;
+			padding-left: 30%;
 		}
 		#player2 {
 			left: 50%;
@@ -60,7 +65,10 @@
 </head>
 <body>
 	<div id="player1"></div>
-	<div id="player2"></div>
+	<div id="player2">
+		<img src="icon.png" alt="icon image" />
+	  </div>
+	  
 	<button id="play-pause" onclick="toggleVideo()">Play</button>
 	<button id="fullscreen-toggle" onclick="toggleFullScreen()">Fullscreen</button>
 	<script>
