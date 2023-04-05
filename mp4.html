@@ -28,7 +28,7 @@
 			margin-right: 10%; /* (100% - 44.4%) / 2 */
 			width: 40%;
 			height: 90%;
-			background-color: white;
+			background-color: black;
 		}
 		#player2 {
 			left: 50%;
@@ -71,8 +71,7 @@
 			margin-left: 10%;
 		}
 		.image-icon.right {
-			right: 0;
-			margin-right: 10%;
+			display: none;
 		}
 	</style>
 </head>
@@ -97,7 +96,7 @@
 		video1.style.objectFit = 'contain';
 		document.getElementById('player1').appendChild(video1);
 
-		video2.src = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+		video2.src = '';
 		video2.muted = true;
 		video2.autoplay = true;
 		video2.controls = false;
